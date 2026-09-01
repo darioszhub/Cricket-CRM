@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="public/images/logo.png" alt="Cricket CRM" width="300">
+</p>
+
 # Cricket CRM
 
 Applicazione CRM sviluppata con **Laravel**, **Vue.js** e **Inertia.js**.
