@@ -92,34 +92,34 @@ const editableOrderData = ref(null);
 
 //Inizio logica formattazione data leggibile dagli input//
 function useDateField(field) {
-    return computed({
-        get() {
-            const value = editableOrderData.value?.[field];
+  return computed({
+    get() {
+      const value = editableOrderData.value?.[field];
 
-            // DEBUG: Stampa il valore originale che arriva dal database
-            console.log(`Valore originale per ${field}:`, value);
+      // DEBUG: Stampa il valore originale che arriva dal database
+      console.log(`Valore originale per ${field}:`, value);
 
-            // Se il valore non esiste, restituisci una stringa vuota.
-            if (!value) {
-                console.log(`Valore per l'input '${field}': '' (campo vuoto)`);
-                return '';
-            }
+      // Se il valore non esiste, restituisci una stringa vuota.
+      if (!value) {
+        console.log(`Valore per l'input '${field}': '' (campo vuoto)`);
+        return '';
+      }
 
-            // Usa 'T' come separatore per estrarre la parte della data
-            const datePart = value.split('T')[0];
+      // Usa 'T' come separatore per estrarre la parte della data
+      const datePart = value.split('T')[0];
 
-            // DEBUG: Stampa il valore formattato che verrà usato nell'input
-            console.log(`Valore per l'input '${field}':`, datePart);
+      // DEBUG: Stampa il valore formattato che verrà usato nell'input
+      console.log(`Valore per l'input '${field}':`, datePart);
 
-            // Restituisci la stringa della data formattata correttamente (yyyy-MM-dd)
-            return datePart;
-        },
-        set(val) {
-            // Quando l'utente modifica l'input, mantieni il formato datetime completo.
-            // Se l'utente seleziona una data '2025-10-26', la trasformi in '2025-10-26 00:00:00'.
-            editableOrderData.value[field] = val ? val + ' 00:00:00' : null;
-        },
-    });
+      // Restituisci la stringa della data formattata correttamente (yyyy-MM-dd)
+      return datePart;
+    },
+    set(val) {
+      // Quando l'utente modifica l'input, mantieni il formato datetime completo.
+      // Se l'utente seleziona una data '2025-10-26', la trasformi in '2025-10-26 00:00:00'.
+      editableOrderData.value[field] = val ? val + ' 00:00:00' : null;
+    },
+  });
 }
 
 // Per utilizzare la funzione, crea una computed property per ogni campo data
@@ -384,6 +384,8 @@ const submitFilter = (formToSubmit) => {
     replace: true,
     onSuccess: (page) => {
       // Se Laravel ha restituito un errore (es. "Inserisci almeno un filtro."),
+
+
       // lo troviamo in page.props.error. Lo assegniamo al form che ha fatto il submit.
       if (page.props.error) {
         const submittedForm = filterForms.value.find(f => f.id === formToSubmit.id);
@@ -745,8 +747,7 @@ const sortBy = (column) => {
               <div>
                 <label :for="'modal-date-' + editableOrderData.IDOrder"
                   class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Data Appuntamento</label>
-                <input type="datetime-local" :id="'modal-date-' + editableOrderData.IDOrder"
-                  v-model="dateAppntModel"
+                <input type="datetime-local" :id="'modal-date-' + editableOrderData.IDOrder" v-model="dateAppntModel"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
               </div>
               <div>

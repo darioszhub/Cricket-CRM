@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\http\Controllers\AuthManager;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailsController;
-use App\Http\Controllers\usersinertia;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderControllerVue;
 use App\http\Controllers\userview;
 use App\Models\Agents;
@@ -56,11 +56,11 @@ Route::get('/', function () {
 
 
 // Rotta per pagina user con 10 righe di esempio
-Route::get('/users', function () {
+/* Route::get('/users', function () {
     $users = Users::take(10)->get(); // Prendi i primi 10 utenti
     return view('users', ['users' => $users]);
     dd($users->toArray());
-});
+}); */
 
 // Rotta per pagina agents con 10 righe di esempio
 Route::get('/agents', function () {
@@ -275,8 +275,8 @@ Route::put('/orders/{order}/update-state', [OrderController::class, 'updateState
 
 //-----------------------------VUE-----------------------------//
 
-//esempio di raccoulta utenti con Vue
-Route::get('/users', [usersinertia::class, 'index'])->name('users.index');
+//Pagina utenti con Vue
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 // Esempio paina Vue
 Route::get('/welcome', function () {
@@ -309,7 +309,7 @@ Route::middleware('auth')->group(function () {
     // Pagine di esempio
     Route::get('/orders', [OrderControllerVue::class, 'index'])->name('orders');
     Route::post('/orders/filter', [OrderControllerVue::class, 'filter'])->name('orders.filter');
-    Route::get('/pagina2', fn () => Inertia::render('Pagina2'))->name('pagina2');
+    Route::get('/pagina2', fn() => Inertia::render('Pagina2'))->name('pagina2');
 });
 
 
@@ -317,4 +317,4 @@ Route::middleware('auth')->group(function () {
 // Route::post('/orders-vue/filter', [OrderControllerVue::class, 'filter'])->name('orders.vue.filter');
 
 
-require __DIR__.'/auth.php'; 
+require __DIR__ . '/auth.php';

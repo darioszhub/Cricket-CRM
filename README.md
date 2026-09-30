@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="public/images/logo.png" alt="Cricket CRM" width="300">
+    <img src="public/images/logo.png" alt="Cricket CRM">
 </p>
 
 # Cricket CRM
